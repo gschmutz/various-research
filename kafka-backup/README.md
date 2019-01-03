@@ -30,8 +30,10 @@ Data in the backup will live in sync with the topics, both on level of partition
 3. Data restore should be by topic, time (all, range)
 4. Data restore should be as fast as possible (using parallelism by partition)
 5. Data backup and restore should retain the order of the messages (by partition)
-6. Data retention on the topic should propagate to the backup data. If a segemnt is deleted from Kafka, then the corresponding data on the backup should be removed as well (after another configurable retention time).
-7. On Restore, an offset mapping index should be provided. We can store the offset of the original message (by topic, partition) with the backup. When restoring the data, a new offset will be created which can be mapped to the original offset. This would allow a consumer to move to the right offset by using the offset and after the restore continue with the last commited offset.  
+6. If possible, record’s metadata should be restored (timestamp,….). In case, original record timestamp may be provided with an header.
+7. Optionally, restored records should be marked with a custom header property (x-restored=recovery timestamp) to inform consumer (just in case they have to be treated differently).
+6. Data retention on the topic should propagate to the backup data. If a segment is deleted from Kafka, then the corresponding data on the backup should be removed as well (after another configurable retention time).
+7. On Restore, an offset mapping index should be provided (We might store the offset of the original message (by topic, partition) with the backup. When restoring the data, a new offset will be created which can be mapped to the original offset). This allows a consumer to move to the right offset by using the offset and after the restore continue with the last commited offset.  
 8. Backup should automatically include new partitions and remove "old" partitions, in situations where a topic is either scaled-up or down. 
 9. There needs to be a monitoring of the lag of the backup. It should be always as minimal as possible in order to not lose to many messages (we need an "online" backup).  
 9. Solution should be as vender-neutral as possible
