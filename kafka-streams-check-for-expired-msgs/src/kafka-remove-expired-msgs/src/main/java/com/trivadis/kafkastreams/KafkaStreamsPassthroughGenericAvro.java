@@ -225,8 +225,8 @@ public class KafkaStreamsPassthroughGenericAvro {
 		options.addOption("t", "target-topic", true, "REQUIRED: The topic to write to.");
 		options.addOption("sr", "schema-registry-url", true,
 				"REQUIRED: the schema registry to connect to for the Avro schemas.");
-		options.addOption("e", "expired-check", false, "OPTIONAL: Flag controlling if the stream processing check if a keyed message is expired (old) and remove it. Defaults to false.");
-		options.addOption("v", "verbose", false, "OPTIONAL: flag controlling if  additional output information should be sent to stdout or stderr");
+		options.addOption("e", "expired-check", false, "OPTIONAL: Flag for  Defaults to false.");
+		options.addOption("v", "verbose", false, "OPTIONAL: flag controlling if additional output information should be sent to stdout or stderr");
 
 		try {
 			// parse the command line arguments
